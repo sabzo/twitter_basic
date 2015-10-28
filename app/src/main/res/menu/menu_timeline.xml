@@ -1,0 +1,41 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.codepath.apps.twitter.timeline.TimelineActivity">
+    <item
+        android:id="@+id/miNotifications"
+        android:title="notifications"
+        android:icon="@drawable/ic_notifications"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/miMessages"
+        android:title="messages"
+        android:icon="@drawable/ic_messages"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/miSearch"
+        android:title="search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView"/>
+
+    <item
+        android:id="@+id/miProfile"
+        android:title="profile"
+        android:orderInCategory="80"
+        app:actionLayout="@layout/action_view_button"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/miFindPeople"
+        android:title="Find People"
+        android:orderInCategory="90"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>
