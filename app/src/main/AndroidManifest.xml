@@ -50,6 +50,12 @@
         <activity
             android:name=".timeline.TimelineActivity">
         </activity>
+        <activity android:name=".timeline.TweetActivity">
+
+        </activity>
+        <activity android:name=".search.SearchActivity">
+
+        </activity>
     </application>
 
 </manifest>

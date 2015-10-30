@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.Locale;
 /**
  * Created by sabelo on 10/11/15.
  */
-public class Tweet {
+public class Tweet implements Serializable {
     String text;
     ArrayList<String> hashtags = null;
     // Colleciton of tweets
     private static ArrayList<Tweet> tweets = null;
-    String id;
+    Long id;
     String created_at;
     String relative_date;
     User user = null;
@@ -30,7 +31,7 @@ public class Tweet {
     public Tweet(JSONObject jsonObject) {
         try {
             text = jsonObject.getString("text");
-            id = jsonObject.getString("id_str");
+            id = jsonObject.getLong("id");
             created_at = jsonObject.getString("created_at");
             relative_date = getRelativeTimeAgo(created_at);
             user = new User(jsonObject.getJSONObject("user"));
@@ -44,7 +45,7 @@ public class Tweet {
     }
 
     public String getScreenName() {
-        return this.user.getScreen_name();
+        return "@" + this.user.getScreen_name();
     }
 
     public String getName() {
@@ -67,7 +68,7 @@ public class Tweet {
         return hashtags;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
