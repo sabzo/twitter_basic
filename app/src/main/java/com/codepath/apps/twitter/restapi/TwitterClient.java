@@ -26,10 +26,10 @@ import com.loopj.android.http.RequestParams;
  * 
  */
 public class TwitterClient extends OAuthBaseClient {
-	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
-	public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = "";
-	public static final String REST_CONSUMER_SECRET = ""; // Change this
+	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class;
+	public static final String REST_URL = "https://api.twitter.com/1.1";
+	public static final String REST_CONSUMER_KEY = "hv7LM4l2uSkO0nWCxrn1pglsN";
+	public static final String REST_CONSUMER_SECRET = "HF8uheFLKNZBmiY34LC5eK9G4Vp3QXFWeXqSbu6O3uq6QugOEb"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://sabtweet"; // Change this (here and in manifest)
 
 	public TwitterClient(Context context) {
@@ -46,13 +46,21 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 
-    public void getHomeTimeline(AsyncHttpResponseHandler handler) {
+    public void getInitialHomeTimeline(AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
         params.put("since_id", 1);
         getClient().get(apiUrl, params, handler);
     }
+
+	public void getSubsequentHomeTimeline(AsyncHttpResponseHandler handler, Long maxID) {
+		String apiUrl = getApiUrl("statuses/home_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		params.put("max_id", maxID);
+		getClient().get(apiUrl, params, handler);
+	}
 
 	public void getTweets(String userID, AsyncHttpResponseHandler handler) {
 
