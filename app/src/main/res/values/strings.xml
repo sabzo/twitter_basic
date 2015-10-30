@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Sabztweet</string>
-    <string name="login_label">Connect with Twitter</string>
+    <string name="login_label">Login with Twitter</string>
     <string name="title_activity_timeline">TimelineActivity</string>
 
     <string name="hello_world">Hello world!</string>

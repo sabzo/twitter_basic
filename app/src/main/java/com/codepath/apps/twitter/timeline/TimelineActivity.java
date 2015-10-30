@@ -40,8 +40,7 @@ public class TimelineActivity extends AppCompatActivity {
             1. Swipe to Refresh Tweets
             4. Create Profile
             5. Reply from Timeline (click) DialogueFragment
-            6. Check internet permissions
-            7. Progress bar when making requests
+          
             8. Store Tweets in SQL Lite for viewing when no internet
          */
     }
@@ -72,9 +71,9 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("Debug", errorResponse.toString());
+                String message = errorResponse != null ? errorResponse.toString(): "Unable to connect";
+                Log.d("Debug", message);
             }
-
         });
     }
 

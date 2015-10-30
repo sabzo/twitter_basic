@@ -2,6 +2,7 @@ package com.codepath.apps.twitter.profile;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.codepath.apps.twitter.models.Tweet;
 import com.codepath.apps.twitter.models.User;
@@ -37,15 +38,18 @@ public class FragmentTweets extends TimelineFragment{
 
     @Override
     public void populateTimeline() {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         client.getInitialTweetsByUserID(id, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 addTweetsToTimelineView(response);
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("Debug", errorResponse.toString());
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }
@@ -56,11 +60,13 @@ public class FragmentTweets extends TimelineFragment{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 addTweetsToTimelineView(response);
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i("Debug", errorResponse.toString());
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }

@@ -5,7 +5,11 @@ import org.scribe.builder.api.FlickrApi;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
 
+import com.codepath.apps.twitter.timeline.TimelineActivity;
 import com.codepath.oauth.OAuthAsyncHttpClient;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpClient;
@@ -32,12 +36,16 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_SECRET = "HF8uheFLKNZBmiY34LC5eK9G4Vp3QXFWeXqSbu6O3uq6QugOEb"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://sabtweet"; // Change this (here and in manifest)
 
+    private static ConnectivityManager connectivityManager = null;
+    private Context context;
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
+        this.context = context;
 	}
 
 
     public void getInitialHomeTimeline(AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
@@ -46,6 +54,7 @@ public class TwitterClient extends OAuthBaseClient {
     }
 
 	public void getSubsequentHomeTimeline(AsyncHttpResponseHandler handler, Long maxID) {
+        if (!isNetworkAvailable()) return;
 		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		RequestParams params = new RequestParams();
 		params.put("count", 25);
@@ -54,6 +63,7 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
     public void getAccountCredentials(AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
         String apiUrl = getApiUrl("account/verify_credentials.json");
         RequestParams params = new RequestParams();
         params.put("skip_status", true);
@@ -61,6 +71,7 @@ public class TwitterClient extends OAuthBaseClient {
     }
 
 	public void getInitialTweetsByUserID(String userID, AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
         String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = new RequestParams();
         params.put("user_id", userID);
@@ -70,6 +81,7 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
     public void getSubsequentTweetsByUserID(String userID, Long maxID, AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
         String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = new RequestParams();
         params.put("user_id", userID);
@@ -77,6 +89,19 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("count", 25);
         getClient().get(apiUrl, params, handler);
     }
+
+    public Boolean isNetworkAvailable() {
+        if(connectivityManager == null) {
+            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean connectedOrConnecting =  activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+        if (!connectedOrConnecting) {
+            Toast.makeText(context, "NO INTERNET CONNECTION!", Toast.LENGTH_LONG).show();
+        }
+        return connectedOrConnecting;
+    }
+
 
 	public void getPhotos(String userID, AsyncHttpResponseHandler handler) {
 

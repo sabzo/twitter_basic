@@ -22,10 +22,12 @@ public class Tweet implements Serializable {
     ArrayList<String> hashtags = null;
     // Colleciton of tweets
     private static ArrayList<Tweet> tweets = null;
-    Long id;
-    String created_at;
-    String relative_date;
-    User user = null;
+    private Long id;
+    private String created_at;
+    private String relative_date;
+
+
+    private User user = null;
 
     // Create a Tweet Object
     public Tweet(JSONObject jsonObject) {
@@ -68,9 +70,10 @@ public class Tweet implements Serializable {
         return hashtags;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+
+    public User getUser() { return user; }
+
 
     // Get Tweets
     public static ArrayList<Tweet> getTweetsFromJsonArray( JSONArray jsonArray ) {
