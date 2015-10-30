@@ -30,7 +30,7 @@ public class ProfileAdapter extends FragmentPagerAdapter {
     public Fragment getItem( int pos) {
         switch (pos) {
             case 0:
-                return FragmentTweets.newInstances(user);
+                return FragmentTweets.newInstance(user);
             case 1:
                 return FragmentPhotos.newInstance(user);
             case 2:
