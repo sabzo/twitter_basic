@@ -47,15 +47,10 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".timeline.TimelineActivity">
-        </activity>
-        <activity android:name=".timeline.TweetActivity">
-
-        </activity>
-        <activity android:name=".search.SearchActivity">
-
-        </activity>
+        <activity android:name=".timeline.TimelineActivity"></activity>
+        <activity android:name=".timeline.TweetActivity"></activity>
+        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".profile.ActivityProfile"></activity>
     </application>
 
 </manifest>

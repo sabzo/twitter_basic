@@ -36,15 +36,6 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	// CHANGE THIS
-	// DEFINE METHODS for different API endpoints here
-    public void getInterestingnessList(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("?nojsoncallback=1&method=flickr.interestingness.getList");
-		// Can specify query string params directly or through RequestParams.
-		RequestParams params = new RequestParams();
-		params.put("format", "json");
-		client.get(apiUrl, params, handler);
-	}
 
     public void getInitialHomeTimeline(AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
@@ -62,9 +53,30 @@ public class TwitterClient extends OAuthBaseClient {
 		getClient().get(apiUrl, params, handler);
 	}
 
-	public void getTweets(String userID, AsyncHttpResponseHandler handler) {
+    public void getAccountCredentials(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("account/verify_credentials.json");
+        RequestParams params = new RequestParams();
+        params.put("skip_status", true);
+        getClient().get(apiUrl, params, handler);
+    }
 
+	public void getInitialTweetsByUserID(String userID, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id", userID);
+        params.put("since_id", 1);
+        params.put("count", 25);
+        getClient().get(apiUrl, params, handler);
 	}
+
+    public void getSubsequentTweetsByUserID(String userID, Long maxID, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id", userID);
+        params.put("max_id", maxID);
+        params.put("count", 25);
+        getClient().get(apiUrl, params, handler);
+    }
 
 	public void getPhotos(String userID, AsyncHttpResponseHandler handler) {
 

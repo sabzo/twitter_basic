@@ -20,7 +20,7 @@ public class ActivityProfile extends AppCompatActivity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_profile);
         //Set up the ViewPager
-        profilePager= (ViewPager) findViewById(R.id.vpProfile);
+        profilePager = (ViewPager) findViewById(R.id.vpProfile);
         User user = (User) getIntent().getSerializableExtra("user");
         // TODO verify user was passed in otherwise error
         profileAdapter = new ProfileAdapter(getSupportFragmentManager(), user);
