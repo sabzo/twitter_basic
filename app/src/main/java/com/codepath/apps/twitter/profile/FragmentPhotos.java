@@ -40,5 +40,6 @@ public class FragmentPhotos extends Fragment {
     @Override
     public void onViewCreated( View view, Bundle savedInstanace) {
         //View initialization
+
     }
 }

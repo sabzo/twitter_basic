@@ -16,13 +16,21 @@
         android:id="@+id/miProfile"
         android:title="profile"
         android:orderInCategory="80"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/miFindPeople"
         android:title="Find People"
         android:orderInCategory="90"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/miLogout"
+        android:title="Logout"
+        android:orderInCategory="95"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"

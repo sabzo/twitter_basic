@@ -90,6 +90,23 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    public void getInitialMentions(AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        getClient().get(apiUrl, params, handler);
+    }
+
+    public void getSubsequentMentions(Long maxID, AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        params.put("max_id", maxID);
+        getClient().get(apiUrl, params, handler);
+    }
+
     public Boolean isNetworkAvailable() {
         if(connectivityManager == null) {
             connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
