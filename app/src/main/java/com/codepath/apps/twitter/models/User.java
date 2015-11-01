@@ -21,6 +21,7 @@ public class User implements Serializable{
     Boolean follow_request_sent;
     int followers_count;
     int friends_count;
+    int statuses_count;
 
     /* Create user from JSON object */
     public User( JSONObject obj) {
@@ -37,6 +38,7 @@ public class User implements Serializable{
             this.follow_request_sent = obj.getBoolean("follow_request_sent");
             this.followers_count = obj.getInt("followers_count");
             this.friends_count = obj.getInt("friends_count");
+            this.statuses_count = obj.getInt("statuses_count");
         }catch (JSONException e) {
             Log.i("Debug", e.toString());
         }
@@ -82,6 +84,8 @@ public class User implements Serializable{
     public int getFriends_count() {
         return friends_count;
     }
+
+    public int getStatuses_count() { return statuses_count; }
 
     /*
     "user": {

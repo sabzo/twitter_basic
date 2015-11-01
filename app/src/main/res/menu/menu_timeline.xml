@@ -17,8 +17,14 @@
         android:title="profile"
         android:orderInCategory="80"
         android:icon="@drawable/ic_profile"
-        app:showAsAction="ifRoom|withText"/>
+        app:showAsAction="always|withText"/>
 
+    <item
+        android:id="@+id/miCompose"
+        android:title="Tweet"
+        android:orderInCategory="70"
+        android:icon="@drawable/ic_pencil_compose"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/miFindPeople"
         android:title="Find People"

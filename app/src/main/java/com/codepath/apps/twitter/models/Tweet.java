@@ -29,7 +29,8 @@ public class Tweet implements Serializable {
 
     private User user = null;
 
-    // Create a Tweet Object
+    // Creates a Tweet Object
+    // Internally creates a User Object
     public Tweet(JSONObject jsonObject) {
         try {
             text = jsonObject.getString("text");

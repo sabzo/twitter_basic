@@ -39,8 +39,6 @@ public class TimelineActivity extends AppCompatActivity {
             1. Swipe to Refresh Tweets
             4. Create Profile
             5. Reply from Timeline (click) DialogueFragment
-            6. User can view their home timeline tweets.
-            7. User can view the recent mentions of their username.
             8. Store Tweets in SQL Lite for viewing when no internet
          */
     }
@@ -66,12 +64,6 @@ public class TimelineActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabsHome);
         tabs.setupWithViewPager(viewPager);
 
-
-        /*
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flHomeTimeline, new HomeTimelineFragment());
-        ft.commit();
-        */
     }
 
     private void getCurrentUserID() {
