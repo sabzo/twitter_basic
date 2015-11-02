@@ -107,6 +107,14 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    public void postTweet(String tweet, AsyncHttpResponseHandler handler) {
+        if (!isNetworkAvailable()) return;
+        String apiUrl = getApiUrl("statuses/update.json");
+        RequestParams params = new RequestParams();
+        params.put("status", tweet);
+        getClient().post(apiUrl, params, handler);
+    }
+
     public Boolean isNetworkAvailable() {
         if(connectivityManager == null) {
             connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

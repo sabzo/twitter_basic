@@ -18,6 +18,7 @@ import com.codepath.apps.twitter.models.User;
 import com.codepath.apps.twitter.profile.ActivityProfile;
 import com.codepath.apps.twitter.restapi.TwitterApplication;
 import com.codepath.apps.twitter.restapi.TwitterClient;
+import com.codepath.apps.twitter.tweet.ActivityPostTweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -104,6 +105,10 @@ public class TimelineActivity extends AppCompatActivity {
             case R.id.miLogout:
                 client.clearAccessToken();
                 intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.miCompose:
+                intent = new Intent(this, ActivityPostTweet.class);
                 startActivity(intent);
                 break;
             default:
