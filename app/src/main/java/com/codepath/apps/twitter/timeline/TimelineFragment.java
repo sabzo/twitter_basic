@@ -3,6 +3,7 @@ package com.codepath.apps.twitter.timeline;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 /**
  * Created by sabelo on 10/29/15.
+ * This is the Master Fragment from which all Timeline Fragments inherit
  */
 public abstract class TimelineFragment extends Fragment {
 
@@ -33,6 +35,7 @@ public abstract class TimelineFragment extends Fragment {
     protected ListView lvTweets;
     protected static String TWEET_DETAIL_KEY = "tweet";
     protected ProgressBar progressBar;
+    protected SwipeRefreshLayout swipeContainer;
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -49,6 +52,7 @@ public abstract class TimelineFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstance) {
         setListViewAdapter(view);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         progressBar = (ProgressBar) view.findViewById(R.id.pbStartStop);
         populateTimeline();
         setEvents();
@@ -101,8 +105,25 @@ public abstract class TimelineFragment extends Fragment {
                 }
             }
         });
+
+        // Refresh data on Swipe down
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateTimeline();
+            }
+        });
     }
 
+    protected void stopRefresh() {
+        if (swipeContainer.isRefreshing()) {
+            swipeContainer.setRefreshing(false);
+        }
+    }
+
+    protected void clearTimeline() {
+        timelineAdapter.clear();
+    }
     protected void addTweetsToTimelineView(JSONArray response) {
         tweets = Tweet.getTweetsFromJsonArray(response);
         timelineAdapter.addAll(tweets);
