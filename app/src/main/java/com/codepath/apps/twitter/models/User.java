@@ -50,7 +50,7 @@ public class User implements Serializable{
     }
 
     public String getProfileImageURL() {
-        return profileImageURL;
+        return profileImageURL.replace("_normal.", "_bigger.");
     }
 
     public String getId() {

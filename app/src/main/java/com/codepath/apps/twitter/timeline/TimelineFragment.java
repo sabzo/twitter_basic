@@ -1,9 +1,11 @@
 package com.codepath.apps.twitter.timeline;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,11 @@ public abstract class TimelineFragment extends Fragment {
         setEvents();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     private void setListViewAdapter(View view) {
         timelineAdapter = new TimelineAdapter(getContext(), tweets);
         lvTweets = (ListView) view.findViewById(R.id.lvTweets);
@@ -73,10 +80,12 @@ public abstract class TimelineFragment extends Fragment {
 
                 switch (view.getId()) {
                     case R.id.ivProfile:
-                        User user = timelineAdapter.getItem(pos).getUser();
-                        Intent intent = new Intent(getContext(), ActivityProfile.class);
-                        intent.putExtra("user", user);
-                        startActivity(intent);
+                        if(!isProfileActivity()) {
+                            User user = timelineAdapter.getItem(pos).getUser();
+                            Intent intent = new Intent(getContext(), ActivityProfile.class);
+                            intent.putExtra("user", user);
+                            startActivity(intent);
+                        }
                         break;
                     default:
                         Intent i = new Intent(getContext(), TweetActivity.class);
@@ -127,6 +136,11 @@ public abstract class TimelineFragment extends Fragment {
     protected void addTweetsToTimelineView(JSONArray response) {
         tweets = Tweet.getTweetsFromJsonArray(response);
         timelineAdapter.addAll(tweets);
+    }
+
+    private boolean isProfileActivity() {
+        String activityName = getActivity().getClass().getSimpleName();
+        return activityName.equals("ActivityProfile") ;
     }
 
     /* Customize the following calls for Homeline and UserProfile */

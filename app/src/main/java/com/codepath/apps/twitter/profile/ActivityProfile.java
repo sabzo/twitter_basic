@@ -3,8 +3,10 @@ package com.codepath.apps.twitter.profile;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ public class ActivityProfile extends AppCompatActivity {
     public void onCreate( Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_profile);
+
+        setUpActionBar();
 
         //Set up the ViewPager
         profilePager = (ViewPager) findViewById(R.id.vpProfile);
@@ -46,4 +50,31 @@ public class ActivityProfile extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabsProfile);
         tabs.setupWithViewPager(profilePager);
     }
+
+    private void setUpActionBar() {
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle("");
+        bar.setDisplayUseLogoEnabled(true);
+        // Set App Icon
+        bar.setLogo(R.drawable.ic_twitter_logo);
+        bar.setDisplayShowHomeEnabled(true);
+        // put "back" arrow
+        bar.setDisplayHomeAsUpEnabled(true);
+        bar.setHomeButtonEnabled(true);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch( item.getItemId() ) {
+            // home button clicked, go to previous activity
+            case android.R.id.home:
+                finish();
+                return true;
+            default :
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
 }

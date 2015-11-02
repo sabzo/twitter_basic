@@ -4,8 +4,8 @@
     android:paddingTop="10dp"
     android:paddingBottom="5dp">
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/ivProfile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -37,7 +37,7 @@
         android:id="@+id/tvTimestamp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:text="Timestamp"/>
 
     <TextView
@@ -48,5 +48,6 @@
         android:layout_below="@+id/tvName"
         android:layout_marginBottom="5dp"
         android:textColor="#000000"
-        android:text="Hello This is a Sample Tweet!!"/>
+        android:text="Hello This is a Sample Tweet!!"
+        android:textSize="16sp"/>
 </RelativeLayout>
