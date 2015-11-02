@@ -90,11 +90,6 @@ public class ActivityPostTweet extends AppCompatActivity {
         client = TwitterApplication.getRestClient();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu( Menu menu) {
-        //getMenuInflater().inflate(R.menu.post_tweet, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
