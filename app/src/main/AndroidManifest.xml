@@ -52,6 +52,7 @@
         <activity android:name=".timeline.TweetActivity"></activity>
         <activity android:name=".search.SearchActivity"></activity>
         <activity android:name=".profile.ActivityProfile"></activity>
+        <activity android:name=".tweet.ActivityPostTweet"></activity>
     </application>
 
 </manifest>
