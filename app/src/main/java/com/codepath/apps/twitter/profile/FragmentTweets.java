@@ -42,14 +42,17 @@ public class FragmentTweets extends TimelineFragment{
         client.getInitialTweetsByUserID(id, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                clearTimeline();
                 addTweetsToTimelineView(response);
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
+                stopRefresh();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("Debug", errorResponse.toString());
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
+                stopRefresh();
             }
         });
     }

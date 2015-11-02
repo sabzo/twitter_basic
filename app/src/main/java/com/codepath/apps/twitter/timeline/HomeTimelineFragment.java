@@ -22,8 +22,10 @@ public class HomeTimelineFragment extends TimelineFragment {
             // success
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
+                clearTimeline();
                 addTweetsToTimelineView(jsonArray);
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
+                stopRefresh();
             }
             // failure
             @Override
@@ -31,6 +33,7 @@ public class HomeTimelineFragment extends TimelineFragment {
                 String message = errorResponse != null ? errorResponse.toString(): "Unable to connect";
                 Log.d("Debug", message);
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
+                stopRefresh();
             }
         });
     }
