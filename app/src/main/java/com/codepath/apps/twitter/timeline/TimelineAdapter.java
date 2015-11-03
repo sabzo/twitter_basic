@@ -26,25 +26,44 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
        super(context, 0, tweets);
     }
 
+    private static class ViewHolder {
+        public TextView tvName;
+        public TextView tvHandle;
+        public TextView tvTimestamp;
+        public TextView tvTweet;
+        public ImageView ivProfile;
+    }
+
+
+
     @Override
     public View getView(final int pos, View convertView, final ViewGroup parent) {
+        ViewHolder viewHolder;
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.tweet, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+            viewHolder.tvHandle = (TextView) convertView.findViewById(R.id.tvHandle);
+            viewHolder.tvTimestamp = (TextView) convertView.findViewById(R.id.tvTimestamp);
+            viewHolder.tvTweet = (TextView) convertView.findViewById(R.id.tvTweet);
+            viewHolder.ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         Tweet tweet = getItem(pos);
-        ((TextView) convertView.findViewById(R.id.tvName)).setText(
-                Html.fromHtml("<b>" + tweet.getName() + "</b>") );
-        ((TextView) convertView.findViewById(R.id.tvHandle)).setText(tweet.getScreenName());
-        ((TextView) convertView.findViewById(R.id.tvTimestamp)).setText(tweet.getRelative_date());
-        ((TextView) convertView.findViewById(R.id.tvTweet)).setText(tweet.getText());
-        ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
-        ivProfile.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tvName.setText(
+                Html.fromHtml("<b>" + tweet.getName() + "</b>"));
+        viewHolder.tvHandle.setText(tweet.getScreenName());
+        viewHolder.tvTimestamp.setText(tweet.getRelative_date());
+        viewHolder.tvTweet.setText(tweet.getText());
+        viewHolder.ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((ListView) parent).performItemClick(view, pos, 0);
             }
         });
-        Picasso.with(getContext()).load(tweet.getProfileImageURL()).into(ivProfile);
+        Picasso.with(getContext()).load(tweet.getProfileImageURL()).into(viewHolder.ivProfile);
         return convertView;
     }
 }

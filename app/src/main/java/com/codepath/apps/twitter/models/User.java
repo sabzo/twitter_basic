@@ -31,14 +31,15 @@ public class User implements Serializable{
             this.profileImageURL = obj.getString("profile_image_url");
             this.id = obj.getString("id_str");
             this.location = obj.getString("location");
-            this.display_url = obj.getJSONObject("entities").getJSONObject("url")
-                    .getJSONArray("urls").getJSONObject(0).getString("display_url");
-            this.expanded_url = obj.getJSONObject("entities").getJSONObject("url")
-                    .getJSONArray("urls").getJSONObject(0).getString("expanded_url");
             this.follow_request_sent = obj.getBoolean("follow_request_sent");
             this.followers_count = obj.getInt("followers_count");
             this.friends_count = obj.getInt("friends_count");
             this.statuses_count = obj.getInt("statuses_count");
+            //May be null so putting last
+            this.display_url = obj.getJSONObject("entities").getJSONObject("url")
+                    .getJSONArray("urls").getJSONObject(0).getString("display_url");
+            this.expanded_url = obj.getJSONObject("entities").getJSONObject("url")
+                    .getJSONArray("urls").getJSONObject(0).getString("expanded_url");
         }catch (JSONException e) {
             Log.i("Debug", e.toString());
         }

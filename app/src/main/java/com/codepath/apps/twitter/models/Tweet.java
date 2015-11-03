@@ -84,7 +84,7 @@ public class Tweet implements Serializable {
                 // create Tweet from JSON Object
                 JSONObject object = jsonArray.getJSONObject(i);
                 Tweet tweet = new Tweet(object);
-                Log.d("Debug", jsonArray.toString());
+                Log.d("Debug", object.toString());
                 tweets.add(tweet);
             } catch( JSONException e) {
                 Log.d("Debug", e.toString());

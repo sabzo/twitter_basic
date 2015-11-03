@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +61,19 @@ public class ActivityPostTweet extends AppCompatActivity {
     }
 
     private void setEvents() {
+        /*
+        etTweet.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                Log.d("tweet", "int i: " + Integer.toString(i));
+                if( keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                    int k = i;
+                }
+
+                return false;
+            }
+        });
+        */
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
